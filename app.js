@@ -12,7 +12,7 @@ const { userModel } = require('./Model/usermodel.js')
 
 const app = express()
 
-app.use(express.static(path.join(__dirname +'/build')))
+app.use(express.static(path.join(__dirname + '/build')))
 
 app.use(cors())
 app.use(bodyparser.json())
