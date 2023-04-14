@@ -12,7 +12,11 @@ const { userModel } = require('./Model/usermodel.js')
 
 const app = express()
 
-app.use(express.static(path.join(__dirname + '/build')))
+const pathtobuild = path.join(__dirname+ '/build')
+
+app.use(express.static(pathtobuild))
+console.log("first")
+console.log(pathtobuild)
 
 app.use(cors())
 app.use(bodyparser.json())
@@ -168,6 +172,7 @@ app.listen(2000,()=>{
 })
 
 app.get('*',(req,res)=>{
-    res.sendFile(path.join(__dirname + '/build/index.html'))
+    const pathindex = path.join(pathtobuild + '/index.html')
+    res.sendFile(pathindex)
 })
 
