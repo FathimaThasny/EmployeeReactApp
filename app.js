@@ -29,7 +29,7 @@ require('./db/connection.js')
 
 
 //signup
-app.post('/register',async(req,res)=>{
+app.post('/api/register',async(req,res)=>{
     let data = new userModel(req.body)
     data.save(
         res.json({status: 'Registered Successfully'})
@@ -39,7 +39,7 @@ app.post('/register',async(req,res)=>{
 
 
 //login
-app.post('/login',async(req,res)=>{
+app.post('/api/login',async(req,res)=>{
 
     let email = req.body.email
     let password = req.body.password
@@ -76,7 +76,7 @@ app.post('/login',async(req,res)=>{
 
 
 //get full list
-app.post('/getlist', async (req,res)=>{
+app.post('/api/getlist', async (req,res)=>{
     let data = await employeeModel.find()
     console.log("getlist")
     jwt.verify(req.body.token,"employeeapp",
@@ -112,7 +112,7 @@ app.post('/getadata', async(req,res)=>{
 
 
 //post employee data
-app.post('/addlist', async(req,res)=>{
+app.post('/api/addlist', async(req,res)=>{
     let data = new employeeModel(req.body)
     jwt.verify(req.body.token,"employeeapp",
     (error,decoded)=>{
@@ -132,7 +132,7 @@ app.post('/addlist', async(req,res)=>{
 
 
 //delete an employee
-app.post('/deletelist', async (req,res)=>{
+app.post('/api/deletelist', async (req,res)=>{
 
     const data = await employeeModel.findByIdAndDelete(req.body)
     console.log(req.body)
@@ -151,7 +151,7 @@ app.post('/deletelist', async (req,res)=>{
 
 
 //update data
-app.post('/modify', async(req,res)=>{
+app.post('/api/modify', async(req,res)=>{
     console.log(req.body._id)
     let data = await employeeModel.findOneAndUpdate({"_id": req.body._id},req.body)
     console.log(data)
